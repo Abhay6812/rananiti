@@ -1,0 +1,90 @@
+table 'RR Bowlers'
+    partition Source = m
+        mode: import
+        source =
+            let
+                Source = Csv.Document(File.Contents("C:\Users\SHEETAL\OneDrive\ドキュメント\Desktop\Rananiti\powerbi\data\RR_Bowlers.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+                Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+                Types = Table.TransformColumnTypes(Headers, {{"rank", Int64.Type}, {"player_id", Int64.Type}, {"player", type text}, {"phase", type text}, {"trust_score", type number}, {"risk_score", type number}, {"confidence", type number}, {"pressure_matches", Int64.Type}, {"pressure_balls", Int64.Type}, {"pressure_overs", type number}, {"pressure_wickets", Int64.Type}, {"pressure_economy", type number}, {"pressure_average", type number}, {"pressure_dot_pct", type number}, {"pressure_boundary_pct", type number}, {"economy", type number}}, "en-US")
+            in
+                Types
+
+    column rank
+        dataType: int64
+        sourceColumn: rank
+        summarizeBy: none
+
+    column player_id
+        dataType: int64
+        sourceColumn: player_id
+        summarizeBy: none
+
+    column player
+        dataType: string
+        sourceColumn: player
+        summarizeBy: none
+
+    column phase
+        dataType: string
+        sourceColumn: phase
+        summarizeBy: none
+
+    column trust_score
+        dataType: double
+        sourceColumn: trust_score
+        summarizeBy: none
+
+    column risk_score
+        dataType: double
+        sourceColumn: risk_score
+        summarizeBy: none
+
+    column confidence
+        dataType: double
+        sourceColumn: confidence
+        summarizeBy: none
+
+    column pressure_matches
+        dataType: int64
+        sourceColumn: pressure_matches
+        summarizeBy: none
+
+    column pressure_balls
+        dataType: int64
+        sourceColumn: pressure_balls
+        summarizeBy: none
+
+    column pressure_overs
+        dataType: double
+        sourceColumn: pressure_overs
+        summarizeBy: none
+
+    column pressure_wickets
+        dataType: int64
+        sourceColumn: pressure_wickets
+        summarizeBy: none
+
+    column pressure_economy
+        dataType: double
+        sourceColumn: pressure_economy
+        summarizeBy: none
+
+    column pressure_average
+        dataType: double
+        sourceColumn: pressure_average
+        summarizeBy: none
+
+    column pressure_dot_pct
+        dataType: double
+        sourceColumn: pressure_dot_pct
+        summarizeBy: none
+
+    column pressure_boundary_pct
+        dataType: double
+        sourceColumn: pressure_boundary_pct
+        summarizeBy: none
+
+    column economy
+        dataType: double
+        sourceColumn: economy
+        summarizeBy: none

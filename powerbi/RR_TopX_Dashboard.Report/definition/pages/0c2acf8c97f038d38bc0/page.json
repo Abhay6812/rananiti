@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "0c2acf8c97f038d38bc0",
+  "displayName": "Pressure Batting",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}

@@ -1,0 +1,34 @@
+{
+  "name": "Rananiti Rajasthan Royals",
+  "dataColors": [
+    "#E76F24",
+    "#1A2742",
+    "#4E6E81",
+    "#B9C5D1",
+    "#A33A4A",
+    "#F2A65A"
+  ],
+  "background": "#F6F8FB",
+  "foreground": "#19283D",
+  "tableAccent": "#E76F24",
+  "visualStyles": {
+    "*": {
+      "*": [
+        {
+          "fontFamily": "Aptos",
+          "titleText": [
+            {
+              "fontSize": 15,
+              "fontFace": "Aptos Display",
+              "color": {
+                "solid": {
+                  "color": "#19283D"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

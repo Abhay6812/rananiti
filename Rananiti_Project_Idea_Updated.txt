@@ -1,0 +1,19 @@
+RANANITI - SUPERR SELECTOR SEASON 2
+
+PROJECT PURPOSE
+
+Build a data-driven system that identifies the 10 batters and 10 bowlers with the strongest evidence of performing under pressure in IPL and T20I matches from 2022 onward. Each player is evaluated against their own usual performance and comparable role or innings phase.
+
+SUBMISSION OUTPUTS
+
+1. Ordered Top 10 batter ranking.
+2. Ordered Top 10 bowler ranking with no repeated player.
+3. A methodology report defining pressure, metrics, fair comparisons, sample thresholds, evidence, and limitations.
+
+METHOD
+
+Reconstruct match context before every ball. Estimate pressure using wickets lost, scoring requirement or scoring pace, balls remaining, and innings progress. Compare pressure performance with each player's baseline. Normalize batter evidence within batting role and bowler evidence within innings phase. Show Trust, Risk, confidence, and sample exposure together so a high score is not separated from its evidence.
+
+DATA
+
+Use the supplied ball-by-ball, match, and competition data. Restrict the ranking population to IPL seasons and T20 Internationals from 2022 onward.

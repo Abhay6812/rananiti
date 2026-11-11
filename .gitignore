@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.streamlit/secrets.toml
+outputs/*.csv
+!outputs/batter_rankings.csv
+!outputs/bowler_rankings.csv
+!outputs/pressure_summary.csv
+outputs/*.parquet
+.ipynb_checkpoints/
+
+!outputs/ranking_evaluation.json
+.verify_run.log

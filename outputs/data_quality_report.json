@@ -1,0 +1,52 @@
+{
+  "source_rows": 200999,
+  "rows_after_required_field_cleaning": 200999,
+  "removed_rows": 0,
+  "duplicate_rows": 0,
+  "missing_required_fields": {
+    "match_id": 0,
+    "innings": 0,
+    "overid": 0,
+    "over_ball_num": 0,
+    "striker_id": 0,
+    "bowler_id": 0,
+    "runs": 0
+  },
+  "extras1_runs_type_counts": [
+    {
+      "extras_type": "Overstep",
+      "extras1_runs": 1,
+      "rows": 576
+    },
+    {
+      "extras_type": "Penalty",
+      "extras1_runs": 7,
+      "rows": 1
+    },
+    {
+      "extras_type": "byes",
+      "extras1_runs": 4,
+      "rows": 529
+    },
+    {
+      "extras_type": "legbyes",
+      "extras1_runs": 3,
+      "rows": 2748
+    },
+    {
+      "extras_type": "other",
+      "extras1_runs": 5,
+      "rows": 264
+    },
+    {
+      "extras_type": "wide",
+      "extras1_runs": 2,
+      "rows": 7714
+    },
+    {
+      "extras_type": NaN,
+      "extras1_runs": 6,
+      "rows": 189167
+    }
+  ]
+}

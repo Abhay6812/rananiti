@@ -1,0 +1,90 @@
+table 'RR Batters'
+    partition Source = m
+        mode: import
+        source =
+            let
+                Source = Csv.Document(File.Contents("C:\Users\SHEETAL\OneDrive\ドキュメント\Desktop\Rananiti\powerbi\data\RR_Batters.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+                Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+                Types = Table.TransformColumnTypes(Headers, {{"rank", Int64.Type}, {"player_id", Int64.Type}, {"player", type text}, {"role", type text}, {"trust_score", type number}, {"risk_score", type number}, {"confidence", type number}, {"pressure_matches", Int64.Type}, {"pressure_balls", Int64.Type}, {"pressure_runs", Int64.Type}, {"pressure_strike_rate", type number}, {"pressure_average", type number}, {"pressure_dot_pct", type number}, {"pressure_boundary_pct", type number}, {"strike_rate", type number}, {"average", type number}}, "en-US")
+            in
+                Types
+
+    column rank
+        dataType: int64
+        sourceColumn: rank
+        summarizeBy: none
+
+    column player_id
+        dataType: int64
+        sourceColumn: player_id
+        summarizeBy: none
+
+    column player
+        dataType: string
+        sourceColumn: player
+        summarizeBy: none
+
+    column role
+        dataType: string
+        sourceColumn: role
+        summarizeBy: none
+
+    column trust_score
+        dataType: double
+        sourceColumn: trust_score
+        summarizeBy: none
+
+    column risk_score
+        dataType: double
+        sourceColumn: risk_score
+        summarizeBy: none
+
+    column confidence
+        dataType: double
+        sourceColumn: confidence
+        summarizeBy: none
+
+    column pressure_matches
+        dataType: int64
+        sourceColumn: pressure_matches
+        summarizeBy: none
+
+    column pressure_balls
+        dataType: int64
+        sourceColumn: pressure_balls
+        summarizeBy: none
+
+    column pressure_runs
+        dataType: int64
+        sourceColumn: pressure_runs
+        summarizeBy: none
+
+    column pressure_strike_rate
+        dataType: double
+        sourceColumn: pressure_strike_rate
+        summarizeBy: none
+
+    column pressure_average
+        dataType: double
+        sourceColumn: pressure_average
+        summarizeBy: none
+
+    column pressure_dot_pct
+        dataType: double
+        sourceColumn: pressure_dot_pct
+        summarizeBy: none
+
+    column pressure_boundary_pct
+        dataType: double
+        sourceColumn: pressure_boundary_pct
+        summarizeBy: none
+
+    column strike_rate
+        dataType: double
+        sourceColumn: strike_rate
+        summarizeBy: none
+
+    column average
+        dataType: double
+        sourceColumn: average
+        summarizeBy: none

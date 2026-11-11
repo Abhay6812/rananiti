@@ -1,0 +1,274 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "f31499ef0580c83195b9",
+  "position": {
+    "x": 535,
+    "y": 135,
+    "z": 1000,
+    "width": 710,
+    "height": 505,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "rank"
+                }
+              },
+              "queryRef": "RR Bowlers.rank",
+              "nativeQueryRef": "Rank"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "player"
+                }
+              },
+              "queryRef": "RR Bowlers.player",
+              "nativeQueryRef": "Player"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "phase"
+                }
+              },
+              "queryRef": "RR Bowlers.phase",
+              "nativeQueryRef": "Phase"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "trust_score"
+                }
+              },
+              "queryRef": "RR Bowlers.trust_score",
+              "nativeQueryRef": "Trust score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "risk_score"
+                }
+              },
+              "queryRef": "RR Bowlers.risk_score",
+              "nativeQueryRef": "Risk score"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "confidence"
+                }
+              },
+              "queryRef": "RR Bowlers.confidence",
+              "nativeQueryRef": "Confidence"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_matches"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_matches",
+              "nativeQueryRef": "Pressure matches"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_balls"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_balls",
+              "nativeQueryRef": "Pressure balls"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_overs"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_overs",
+              "nativeQueryRef": "Pressure overs"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_wickets"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_wickets",
+              "nativeQueryRef": "Pressure wickets"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_economy"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_economy",
+              "nativeQueryRef": "Pressure economy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "economy"
+                }
+              },
+              "queryRef": "RR Bowlers.economy",
+              "nativeQueryRef": "Baseline economy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_dot_pct"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_dot_pct",
+              "nativeQueryRef": "Dot ball %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
+                  "Property": "pressure_boundary_pct"
+                }
+              },
+              "queryRef": "RR Bowlers.pressure_boundary_pct",
+              "nativeQueryRef": "Boundary %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pressure evidence and baseline comparison'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#19283D'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Aptos Display'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

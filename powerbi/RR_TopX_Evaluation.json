@@ -1,0 +1,28 @@
+{
+  "team": "Rajasthan Royals",
+  "seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "matches": 371,
+  "rr_matches": 367,
+  "rr_high_pressure_batting_deliveries": 503,
+  "rr_high_pressure_bowling_deliveries": 680,
+  "batter_eligibility": {
+    "minimum_pressure_balls": 1,
+    "minimum_pressure_matches": 1,
+    "qualifying_players": 11,
+    "candidate_players": 14
+  },
+  "bowler_eligibility": {
+    "minimum_pressure_balls": 12,
+    "minimum_pressure_matches": 3,
+    "qualifying_players": 12,
+    "candidate_players": 40
+  },
+  "batter_screen": "Median batting position above 7 and at least 60 RR IPL balls faced across 2022-2026.",
+  "top_x_max": 10
+}
