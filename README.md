@@ -12,7 +12,7 @@ Run these commands in PowerShell from the project root:
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-streamlit run dashboard/app.py
+streamlit run streamlit_app.py
 ```
 
 Streamlit serves the app at `http://localhost:8501`. The dashboard shows RR batting and bowling rankings, supports a Top X selection, compares pressure performance with a player's usual baseline, and provides evidence tables and CSV downloads. The **Method & data** tab shows the scoring approach, coverage and applied sample thresholds.
@@ -139,11 +139,11 @@ data/                            Raw source data
 outputs/                         Generated rankings and evaluations
 reports/                         Methodology and findings
 powerbi/                         PBIP report, model source and dashboard CSVs
-models/                          Model-artifact location (if used by a separate analysis)
+models/                          Trained model artifacts (serialized files use Git LFS)
 ```
 
 ### Current scope and limitations
 
-The running Top X product is built from the pressure, role/phase, Trust and Risk pipeline described above. The notebooks currently present in `notebooks/` do not train or load a clustering model, and clustering artifacts are not part of the Streamlit or Power BI ranking workflow. The `models/` folder is reserved for separate model artifacts.
+The running Top X product is built from the pressure, role/phase, Trust and Risk pipeline described above. The notebooks currently present in `notebooks/` do not train or load a clustering model, and clustering artifacts are not part of the Streamlit or Power BI ranking workflow. Save any models trained by future analyses under `models/`; the repository tracks common serialized model formats with Git LFS so they can be committed and pushed with the rest of the project.
 
 The pressure ranking depends on the coverage and quality of the supplied historical data. RR samples may be small, so confidence and exposure should be considered with every score. Supplied extras fields are incomplete for some bowling penalties; bowling run totals estimate minimum wide/Overstep penalties. Validate candidates with cricket staff and match context before making squad decisions.

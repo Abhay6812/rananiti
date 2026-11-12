@@ -3,6 +3,7 @@ __pycache__/
 .venv/
 venv/
 .streamlit/secrets.toml
+.verify_run.log
 outputs/*.csv
 !outputs/batter_rankings.csv
 !outputs/bowler_rankings.csv
@@ -11,4 +12,3 @@ outputs/*.parquet
 .ipynb_checkpoints/
 
 !outputs/ranking_evaluation.json
-.verify_run.log
