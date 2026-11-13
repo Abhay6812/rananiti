@@ -44,6 +44,9 @@ def build_rr_topx(max_top_x: int = 10) -> dict:
     # The inferred Lower Order group mainly represents tail-end bowling roles
     # in this feed. Require a meaningful RR batting history as well, so players
     # with only a few tail-end appearances don't enter the batter list.
+    rr_batter_candidates = int(batters["player_id"].nunique())
+    excluded_lower_order = int(batters.loc[batters["role"].eq("Lower Order"), "player_id"].nunique())
+    excluded_under_60_balls = int(batters.loc[batters["role"].ne("Lower Order") & batters["balls"].lt(60), "player_id"].nunique())
     batters = batters[batters["role"].ne("Lower Order") & batters["balls"].ge(60)].copy()
     bowlers = add_bowler_scores(bowler_summary(rr_bowling, by_phase=True))
     thresholds = [(30, 5), (12, 3), (12, 1), (1, 1)]
@@ -108,6 +111,10 @@ def build_rr_topx(max_top_x: int = 10) -> dict:
         "batter_eligibility": batter_eligibility,
         "bowler_eligibility": bowler_eligibility,
         "batter_screen": "Median batting position above 7 and at least 60 RR IPL balls faced across 2022-2026.",
+        "batter_candidates_before_screen": rr_batter_candidates,
+        "excluded_lower_order_players": excluded_lower_order,
+        "excluded_non_lower_order_under_60_balls": excluded_under_60_balls,
+        "batter_candidates_after_screen": int(batters["player_id"].nunique()),
         "top_x_max": max_top_x,
     }
     (OUTPUTS / "rr_topx_evaluation.json").write_text(json.dumps(evaluation, indent=2), encoding="utf-8")

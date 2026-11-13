@@ -12,7 +12,9 @@ Match state is reconstructed before each delivery to avoid leakage. First-inning
 
 Batter pressure performance combines pressure strike rate, pressure average, dot-ball avoidance, boundary scoring, dismissal avoidance, retention of the player's normal strike rate, and match-to-match consistency. Percentiles are computed within historical batting role. Bowler performance combines pressure economy, dot-ball control, wickets per pressure over, boundary prevention, retention against normal economy, and match-to-match consistency; bowlers are compared within powerplay, middle, or death phase. Trust ratings are confidence-adjusted toward 50 for low exposure. Risk is calculated separately from performance deterioration, dismissals or boundaries, and volatility.
 
-Eligibility initially requires at least 30 pressure balls across 5 pressure matches. If fewer than ten distinct players qualify, the threshold is relaxed in documented steps; each final ranking CSV and `ranking_evaluation.json` Top 10 bowlers are distinct players, ranked by their strongest phase-qualified profile.
+Eligibility is fixed at at least 30 pressure balls across 5 pressure matches. Thresholds do not relax; if fewer than ten distinct players qualify, the output is shorter than ten. Each bowler appears once, using the highest Trust phase only among phase profiles that independently pass the fixed exposure threshold.
+
+The batting baseline is the player's aggregate batting rate across the eligible sample; bowler retention compares pressure economy with the non-pressure economy. Baselines are not shrunk to a role mean. Confidence adjustment shrinks the final Trust score toward 50 as pressure exposure falls. Players from IPL and T20I are pooled in the eligible dataset and compared within role or phase; there is no explicit opposition-strength or competition-format adjustment, so this remains a limitation.
 
 ## Top 10 batters
 
@@ -44,6 +46,29 @@ Eligibility initially requires at least 30 pressure balls across 5 pressure matc
 | 9 | Mohammad Wasim | Death | 61.4 | 33.4 | 41 | 6.8 | 5.6 | 3 | 61.0 |
 | 10 | Sunil Narine | Death | 60.6 | 31.8 | 42 | 7.0 | 4.7 | 4 | 40.5 |
 
+## Pressure evidence and sensitivity
+
+Pressure index quantiles and delivery shares, plus observed run rate and wicket rate for pressure and ordinary balls, are reported in `ranking_evaluation.json`. In this feed, pressure deliveries had run rate 8.53 vs 8.39 per six legal balls, and 9.64 vs 5.28 wickets per 100 legal balls. Top-10 overlap is recalculated at cutoffs 50, 60 and 70. These are descriptive sensitivity checks. Alternating date-ordered match halves are compared with the full-data Top 10 in `ranking_evaluation.json`; a bootstrap rank interval is not yet implemented. There is no ball-level win-probability feed, so win-probability swing is not estimated.
+
+| Cutoff | Pressure deliveries | Batter overlap with 60 | Bowler overlap with 60 |
+|---:|---:|---:|---:|
+| 50 | 24,326 | 4/10 | 5/10 |
+| 60 | 14,918 | 10/10 | 10/10 |
+| 70 | 10,203 | 7/10 | 3/10 |
+
+Top-10 sensitivity is limited across the tested cutoffs. Treat the index cutoff as a material modeling choice, not a validated optimum.
+
+| Match half | Matches | Batter overlap with full Top 10 | Bowler overlap with full Top 10 |
+|---|---:|---:|---:|
+| Odd | 419 | 4/10 | 3/10 |
+| Even | 418 | 4/10 | 0/10 |
+
+The alternating match split shows rank instability, especially for bowlers; low overlap indicates these lists need validation before strong selection decisions.
+
+## Secondary RR dashboard exclusions
+
+The RR-only squad view is separate from the overall submission lists. Across its current 2022–2026 batting candidate pool, 52 players were considered; 25 inferred lower-order profiles and 13 other players below 60 RR IPL balls were excluded, leaving 14 batter candidates. These screens apply only to that secondary RR view.
+
 ## Reliability checks and limitations
 
-Eligibility counts, fallback thresholds, match counts, confidence, and the full metric set are saved in `outputs/`. Rankings use observed IPL/T20I history from 2022 onward and avoid relying on reputation. High-pressure samples can still be small or uneven across contexts. Bowling runs include an estimated minimum penalty for wides and Oversteps because the supplied extras fields are incomplete; review bowling economy with that limitation in mind.
+Eligibility counts, fixed thresholds, match counts, confidence, alternating-split overlap, and the full metric set are saved in `outputs/`. Rankings use observed IPL/T20I history from 2022 onward and avoid relying on reputation. Confidence and exposure describe sample quantity; the alternating split is a simple stability check, while bootstrap rank intervals remain future work. High-pressure samples can still be small or uneven across contexts. Bowling runs include an estimated minimum penalty for wides and Oversteps because the supplied extras fields are incomplete; review bowling economy with that limitation in mind.

@@ -12,6 +12,210 @@
     ]
   },
   "pressure_definition": "Pre-delivery context index; high pressure is index >= 60.",
+  "pressure_diagnostics": {
+    "index_quantiles": {
+      "0": 0.0,
+      "0.25": 11.6,
+      "0.5": 22.0,
+      "0.75": 37.0,
+      "0.9": 54.4,
+      "0.95": 71.5,
+      "1": 96.9
+    },
+    "distribution": [
+      {
+        "index_band": "0-30",
+        "deliveries": 126752,
+        "share_pct": 65.33
+      },
+      {
+        "index_band": "30-50",
+        "deliveries": 43085,
+        "share_pct": 22.21
+      },
+      {
+        "index_band": "50-60",
+        "deliveries": 9315,
+        "share_pct": 4.8
+      },
+      {
+        "index_band": "60-70",
+        "deliveries": 4709,
+        "share_pct": 2.43
+      },
+      {
+        "index_band": "70-85",
+        "deliveries": 4898,
+        "share_pct": 2.52
+      },
+      {
+        "index_band": "85-100",
+        "deliveries": 5255,
+        "share_pct": 2.71
+      }
+    ],
+    "by_pressure_flag": {
+      "ordinary": {
+        "legal_deliveries": 171870,
+        "run_rate_per_6_balls": 8.388,
+        "wickets_per_100_legal_balls": 5.284
+      },
+      "pressure": {
+        "legal_deliveries": 14105,
+        "run_rate_per_6_balls": 8.53,
+        "wickets_per_100_legal_balls": 9.642
+      }
+    },
+    "win_probability_swing": null,
+    "win_probability_note": "Not calculated: source data has final results but no ball-level win-probability model or licensed feed."
+  },
+  "cutoff_sensitivity": {
+    "50": {
+      "pressure_deliveries": 24326,
+      "batter_top10": [
+        "Tristan Stubbs",
+        "Ravindra Jadeja",
+        "George Dockrell",
+        "Ashutosh Sharma",
+        "Akeal Hosein",
+        "Aiden Markram",
+        "Namboori Tilak Varma",
+        "Vipraj Nigam",
+        "Corbin Bosch",
+        "Arshad Khan"
+      ],
+      "bowler_top10": [
+        "Mohammad Nawaz",
+        "Jamie Overton",
+        "Gerald Coetzee",
+        "Abrar Ahmed",
+        "Noor Ahmad",
+        "Shadab Khan",
+        "Adil Rashid",
+        "Richard Ngarava",
+        "Kuldeep Yadav",
+        "Eshan Malinga"
+      ]
+    },
+    "60": {
+      "pressure_deliveries": 14918,
+      "batter_top10": [
+        "Rinku Singh",
+        "Ravindra Jadeja",
+        "Rashid Khan",
+        "Sikandar Raza",
+        "Naman Dhir",
+        "Mahendra Singh Dhoni",
+        "Namboori Tilak Varma",
+        "Akeal Hosein",
+        "Tristan Stubbs",
+        "Shashank Singh"
+      ],
+      "bowler_top10": [
+        "Kuldeep Yadav",
+        "Mohammad Nawaz",
+        "Abrar Ahmed",
+        "Corbin Bosch",
+        "Shadab Khan",
+        "Gerald Coetzee",
+        "Mitchell Santner",
+        "Jasprit Bumrah",
+        "Mohammad Wasim",
+        "Sunil Narine"
+      ]
+    },
+    "70": {
+      "pressure_deliveries": 10203,
+      "batter_top10": [
+        "Rinku Singh",
+        "Rashid Khan",
+        "Mahendra Singh Dhoni",
+        "Tristan Stubbs",
+        "Marco Jansen",
+        "David Miller",
+        "Ravindra Jadeja",
+        "Naman Dhir",
+        "Akeal Hosein",
+        "Matthew Wade"
+      ],
+      "bowler_top10": [
+        "Maheesh Theekshana",
+        "Abrar Ahmed",
+        "Hardik Pandya",
+        "Noor Ahmad",
+        "Kuldeep Yadav",
+        "Mohit Sharma",
+        "Adil Rashid",
+        "Yuzvendra Chahal",
+        "Matheesha Pathirana",
+        "Jasprit Bumrah"
+      ]
+    }
+  },
+  "alternating_match_split": {
+    "odd": {
+      "matches": 419,
+      "eligible_batters": 50,
+      "eligible_bowlers": 54,
+      "batter_top10": [
+        "Mahendra Singh Dhoni",
+        "Ravindra Jadeja",
+        "Rinku Singh",
+        "Dasun Shanaka",
+        "Liam Livingstone",
+        "Aiden Markram",
+        "Ashutosh Sharma",
+        "Rovman Powell",
+        "Shashank Singh",
+        "David Miller"
+      ],
+      "bowler_top10": [
+        "Jasprit Bumrah",
+        "Kuldeep Yadav",
+        "Maheesh Theekshana",
+        "Rashid Khan",
+        "Mitchell Santner",
+        "FazalHaq Farooqi",
+        "Tim Southee",
+        "Mohammed Shami",
+        "Mustafizur Rahman",
+        "Kagiso Rabada"
+      ],
+      "batter_overlap_with_full_top10": 4,
+      "bowler_overlap_with_full_top10": 3
+    },
+    "even": {
+      "matches": 418,
+      "eligible_batters": 45,
+      "eligible_bowlers": 54,
+      "batter_top10": [
+        "Tristan Stubbs",
+        "Mitchell Santner",
+        "Rashid Khan",
+        "Rahul Tewatia",
+        "Dinesh Karthik",
+        "Akeal Hosein",
+        "Jason Holder",
+        "Namboori Tilak Varma",
+        "Sherfane Rutherford",
+        "Marco Jansen"
+      ],
+      "bowler_top10": [
+        "Varun Chakravarthy",
+        "Harshit Rana",
+        "Mohit Sharma",
+        "Benjamin Sears",
+        "Patrick Cummins",
+        "Matheesha Pathirana",
+        "Cameron Green",
+        "Jaydev Unadkat",
+        "Mohammad Saifuddin",
+        "Mohammed Siraj"
+      ],
+      "batter_overlap_with_full_top10": 4,
+      "bowler_overlap_with_full_top10": 0
+    }
+  },
   "batter_eligibility": {
     "minimum_pressure_balls": 30,
     "minimum_pressure_matches": 5,

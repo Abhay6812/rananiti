@@ -24,5 +24,9 @@
     "candidate_players": 40
   },
   "batter_screen": "Median batting position above 7 and at least 60 RR IPL balls faced across 2022-2026.",
+  "batter_candidates_before_screen": 52,
+  "excluded_lower_order_players": 25,
+  "excluded_non_lower_order_under_60_balls": 13,
+  "batter_candidates_after_screen": 14,
   "top_x_max": 10
 }
