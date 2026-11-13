@@ -98,14 +98,14 @@ if view_mode == "Submission rankings (IPL + T20I)":
         top_batter = overall_batters.iloc[0]
         top_bowler = overall_bowlers.iloc[0]
         st.subheader("The pressure edge")
-        st.caption("How the top-ranked batter and bowler performed in pressure situations versus their usual baseline.")
+        st.caption("How the top-ranked batter and bowler performed in pressure situations versus their non-pressure baseline.")
         spotlight = st.columns(2)
         with spotlight[0].container(border=True):
             st.caption("TOP BATTER · RANKED BY TRUST")
             st.subheader(top_batter["player"])
             st.metric("Pressure strike rate", f"{top_batter['pressure_strike_rate']:.1f}")
             st.caption(
-                f"Usual {top_batter['strike_rate']:.1f} · "
+                f"Non-pressure baseline {top_batter['strike_rate']:.1f} · "
                 f"{top_batter['pressure_strike_rate'] - top_batter['strike_rate']:+.1f} strike-rate points under pressure"
             )
             st.caption(
@@ -117,13 +117,13 @@ if view_mode == "Submission rankings (IPL + T20I)":
             st.caption("TOP BOWLER · RANKED BY TRUST")
             st.subheader(top_bowler["player"])
             st.metric("Pressure economy", f"{top_bowler['pressure_economy']:.2f} runs/over")
-            economy_change = top_bowler["economy"] - top_bowler["pressure_economy"]
+            economy_change = top_bowler["normal_economy"] - top_bowler["pressure_economy"]
             economy_comparison = (
                 f"{economy_change:.2f} lower than usual"
                 if economy_change >= 0
                 else f"{abs(economy_change):.2f} higher than usual"
             )
-            st.caption(f"Usual {top_bowler['economy']:.2f} · {economy_comparison}")
+            st.caption(f"Non-pressure baseline {top_bowler['normal_economy']:.2f} · {economy_comparison}")
             st.caption(
                 f"Trust {top_bowler['trust_score']:.1f} · Risk {top_bowler['risk_score']:.1f} · "
                 f"Confidence {top_bowler['confidence']:.1f} · "
@@ -137,8 +137,10 @@ if view_mode == "Submission rankings (IPL + T20I)":
         guide[1].markdown("**Risk**  \nA separate warning signal; lower is preferable. Read it alongside Trust and the sample.")
         guide[2].markdown("**Confidence**  \nReflects how much pressure data supports the score—not the chance of future success.")
         st.caption(
-            "Eligibility: at least 30 pressure balls across 5 matches. Batters are compared by role; "
-            "bowlers by phase and appear once under their strongest qualifying phase."
+            f"Final Trust averages confidence-adjusted scores at pressure cutoffs 50, 60 and 70. "
+            f"Eligibility: at least {overall_eval['ranking_method']['minimum_pressure_balls']} pressure balls "
+            f"across {overall_eval['ranking_method']['minimum_pressure_matches']} matches at cutoff 60. "
+            "Batters are compared by role; bowlers by phase and appear once under their strongest qualifying phase."
         )
     split_check = overall_eval.get("alternating_match_split", {})
     sensitivity_check = overall_eval.get("cutoff_sensitivity", {})
@@ -153,13 +155,21 @@ if view_mode == "Submission rankings (IPL + T20I)":
             "rank": "Rank", "player": "Player", "role": "Role", "trust_score": "Trust",
             "risk_score": "Risk", "confidence": "Confidence", "pressure_matches": "Matches",
             "pressure_balls": "Balls", "pressure_strike_rate": "Pressure strike rate",
-            "strike_rate": "Overall strike rate", "pressure_average": "Pressure average",
+            "strike_rate": "Non-pressure strike rate", "pressure_average": "Pressure average",
         })
         batter_view["Sample"] = batter_view.apply(
             lambda row: f"{int(row['Balls'])} balls · {int(row['Matches'])} matches",
             axis=1,
         )
-        batter_columns = ["Rank", "Player", "Role", "Trust", "Risk", "Confidence", "Sample"]
+        batter_view["90% rank band"] = batter_view.apply(
+            lambda row: f"{int(row['bootstrap_rank_low'])}–{int(row['bootstrap_rank_high'])}"
+            if pd.notna(row["bootstrap_rank_low"]) and pd.notna(row["bootstrap_rank_high"])
+            else "Not estimable",
+            axis=1,
+        )
+        batter_view["Bootstrap eligible"] = batter_view["bootstrap_eligible_pct"].map(lambda value: f"{value:.0f}%")
+        batter_columns = ["Rank", "Player", "Role", "Trust", "Risk", "Confidence", "Sample",
+                          "90% rank band", "Bootstrap eligible"]
         st.dataframe(batter_view[[c for c in batter_columns if c in batter_view]], hide_index=True, use_container_width=True,
                      column_config={
                          "Rank": st.column_config.NumberColumn(width=55, format="%d"),
@@ -167,6 +177,8 @@ if view_mode == "Submission rankings (IPL + T20I)":
                          "Role": st.column_config.TextColumn(width=105),
                          **{c: st.column_config.NumberColumn(width=72, format="%.1f") for c in ["Trust", "Risk", "Confidence"]},
                          "Sample": st.column_config.TextColumn(width=145),
+                         "90% rank band": st.column_config.TextColumn(width=110),
+                         "Bootstrap eligible": st.column_config.TextColumn(width=115),
                      })
         st.download_button("Download batter rankings", overall_batters.to_csv(index=False), "batter_rankings.csv", "text/csv")
     with bowling_tab:
@@ -182,7 +194,15 @@ if view_mode == "Submission rankings (IPL + T20I)":
             lambda row: f"{int(row['Balls'])} balls · {int(row['Matches'])} matches",
             axis=1,
         )
-        bowler_columns = ["Rank", "Player", "Phase", "Trust", "Risk", "Confidence", "Sample"]
+        bowler_view["90% rank band"] = bowler_view.apply(
+            lambda row: f"{int(row['bootstrap_rank_low'])}–{int(row['bootstrap_rank_high'])}"
+            if pd.notna(row["bootstrap_rank_low"]) and pd.notna(row["bootstrap_rank_high"])
+            else "Not estimable",
+            axis=1,
+        )
+        bowler_view["Bootstrap eligible"] = bowler_view["bootstrap_eligible_pct"].map(lambda value: f"{value:.0f}%")
+        bowler_columns = ["Rank", "Player", "Phase", "Trust", "Risk", "Confidence", "Sample",
+                          "90% rank band", "Bootstrap eligible"]
         st.dataframe(bowler_view[[c for c in bowler_columns if c in bowler_view]], hide_index=True, use_container_width=True,
                      column_config={
                          "Rank": st.column_config.NumberColumn(width=55, format="%d"),
@@ -190,25 +210,33 @@ if view_mode == "Submission rankings (IPL + T20I)":
                          "Phase": st.column_config.TextColumn(width=105),
                          **{c: st.column_config.NumberColumn(width=72, format="%.1f") for c in ["Trust", "Risk", "Confidence"]},
                          "Sample": st.column_config.TextColumn(width=145),
+                         "90% rank band": st.column_config.TextColumn(width=110),
+                         "Bootstrap eligible": st.column_config.TextColumn(width=115),
                      })
         st.download_button("Download bowler rankings", overall_bowlers.to_csv(index=False), "bowler_rankings.csv", "text/csv")
     with evidence_tab:
         if split_check and sensitivity_check:
             st.warning(
-                "Treat the rankings as a first-pass shortlist: the fixed Top 10 changes with the pressure cutoff "
-                "and shows low overlap across match groups."
+                "Use the rank bands, cutoff overlap, and match-split results together: the ordering has sampling and context uncertainty."
             )
-        st.markdown("**Pressure cutoff:** a delivery is counted as high pressure when its index reaches the chosen cutoff. The project uses 60; we also reran the rankings at 50 and 70.")
+        st.markdown("**Pressure cutoff:** the final Trust averages scores at cutoffs 50, 60, and 70. Sample eligibility and displayed exposure use cutoff 60.")
         st.subheader("Do the same players stay in the Top 10?")
-        st.caption("Overlap counts how many names from each alternative Top 10 also appear in the cutoff-60 Top 10. A lower count means the list is sensitive to the cutoff.")
+        st.caption("Overlap counts how many names from each single-cutoff Top 10 also appear in the final three-cutoff mean Top 10.")
         sensitivity = overall_eval.get("cutoff_sensitivity", {})
-        if sensitivity and "60" in sensitivity:
+        if sensitivity:
             rows = []
             for cutoff, result in sensitivity.items():
                 rows.append({"Cutoff": int(cutoff), "Pressure deliveries": result["pressure_deliveries"],
-                             "Batter overlap vs 60": len(set(result["batter_top10"]) & set(sensitivity["60"]["batter_top10"])),
-                             "Bowler overlap vs 60": len(set(result["bowler_top10"]) & set(sensitivity["60"]["bowler_top10"]))})
+                             "Batter overlap vs final": f"{result['batter_overlap_with_final_top10']}/10",
+                             "Bowler overlap vs final": f"{result['bowler_overlap_with_final_top10']}/10"})
             st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+        st.subheader("What do the baselines and rank bands mean?")
+        st.markdown(
+            "A batter's baseline is runs per ball faced on non-pressure deliveries. A bowler's baseline is team runs conceded "
+            "per non-pressure legal over. The 90% rank band is the 5th–95th percentile from 100 match-level bootstrap resamples; "
+            "the eligibility percentage indicates how often that player still met the minimum sample rule. IPL and T20I are "
+            "pooled and normalized within role or phase, but opposition strength and competition format are not explicitly adjusted."
+        )
         diagnostics = overall_eval.get("pressure_diagnostics", {})
         st.subheader("What was different in pressure deliveries?")
         st.caption("Observed delivery outcomes, comparing the model's pressure group with all other legal balls:")
@@ -322,10 +350,10 @@ with batting_tab:
         st.plotly_chart(fig, use_container_width=True)
     with right:
         st.subheader("Pressure strike rate vs baseline")
-        st.markdown('<div class="rr-note">Compare scoring speed in pressure balls with the player’s usual RR rate.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="rr-note">Compare pressure scoring speed with the player’s non-pressure RR baseline.</div>', unsafe_allow_html=True)
         compare = compare_batter_rates(view).melt(id_vars="Player", var_name="Context", value_name="Strike rate")
         fig = px.bar(compare, x="Player", y="Strike rate", color="Context", barmode="group",
-                     color_discrete_map={"Under pressure": "#e50072", "Usual baseline": "#203b68"})
+                     color_discrete_map={"Under pressure": "#e50072", "Non-pressure baseline": "#203b68"})
         fig.update_layout(height=390, margin=dict(l=5, r=15, t=10, b=10), paper_bgcolor="rgba(0,0,0,0)",
                           plot_bgcolor="rgba(0,0,0,0)", xaxis=dict(title="", tickangle=-25), yaxis=dict(gridcolor="#e8edf2"),
                           legend=dict(orientation="h", y=1.12, x=0))
@@ -365,23 +393,25 @@ with bowling_tab:
                           xaxis=dict(range=[0, 100], gridcolor="#e8edf2"), yaxis=dict(title=""))
         st.plotly_chart(fig, use_container_width=True)
     with right:
-        st.subheader("Pressure economy vs baseline")
+        st.subheader("Pressure economy vs non-pressure baseline")
         st.markdown('<div class="rr-note">Lower economy is better. Review beside wickets and sample size.</div>', unsafe_allow_html=True)
         compare = compare_bowler_economy(view).melt(id_vars="Player", var_name="Context", value_name="Economy")
         fig = px.bar(compare, x="Player", y="Economy", color="Context", barmode="group",
-                     color_discrete_map={"Under pressure": "#e50072", "Usual baseline": "#203b68"})
+                     color_discrete_map={"Under pressure": "#e50072", "Non-pressure baseline": "#203b68"})
         fig.update_layout(height=390, margin=dict(l=5, r=15, t=10, b=10), paper_bgcolor="rgba(0,0,0,0)",
                           plot_bgcolor="rgba(0,0,0,0)", xaxis=dict(title="", tickangle=-25), yaxis=dict(gridcolor="#e8edf2"),
                           legend=dict(orientation="h", y=1.12, x=0))
         st.plotly_chart(fig, use_container_width=True)
     st.subheader("Bowler evidence")
     bowler_cols = ["rank", "player", "phase", "trust_score", "risk_score", "confidence", "pressure_matches",
-                   "pressure_balls", "pressure_overs", "pressure_wickets", "pressure_economy", "economy"]
+                   "pressure_balls", "pressure_overs", "pressure_wickets", "pressure_economy",
+                   "normal_economy", "economy"]
     bowler_table = view[[c for c in bowler_cols if c in view]].rename(columns={
         "rank": "Rank", "player": "Player", "phase": "Best phase", "trust_score": "Trust", "risk_score": "Risk",
         "confidence": "Confidence", "pressure_matches": "Pressure matches", "pressure_balls": "Pressure balls",
         "pressure_overs": "Pressure overs", "pressure_wickets": "Pressure wickets",
-        "pressure_economy": "Pressure economy", "economy": "Baseline economy",
+        "pressure_economy": "Pressure economy", "normal_economy": "Non-pressure baseline",
+        "economy": "Overall economy",
     })
     st.dataframe(bowler_table, hide_index=True, use_container_width=True, column_config={
         key: st.column_config.ProgressColumn(key, min_value=0, max_value=100, format="%.1f")

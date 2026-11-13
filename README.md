@@ -17,7 +17,7 @@ streamlit run streamlit_app.py
 
 Streamlit serves the app at `http://localhost:8501`. The dashboard opens on the overall Top 10 batter and bowler rankings across IPL and T20I. The RR squad view is a secondary option. Both views provide evidence tables and downloads; the overall view reports cutoff sensitivity and pressure-versus-ordinary delivery diagnostics.
 
-The overall dashboard reads generated submission outputs in `outputs/`. The RR view builds insights through `src/rankings/rr_dashboard_insights.py` and `src/rankings/rr_topx.py`. Regenerate overall outputs with `python -m src.rankings.rank_players` after changing source data.
+The overall dashboard reads generated submission outputs in `outputs/`, including match-bootstrap rank bands. The RR view builds insights through `src/rankings/rr_dashboard_insights.py` and `src/rankings/rr_topx.py`. Regenerate overall outputs with `python -m src.rankings.rank_players` after changing source data.
 
 ## Project workflow
 
@@ -118,9 +118,11 @@ Open `powerbi/RR_TopX_Dashboard.pbip` in Power BI Desktop. The source CSVs are `
 ### Submission selection rules
 
 - Submission rankings include IPL and T20I matches from 2022 onward.
-- Eligibility is fixed at 30 pressure balls across 5 pressure matches. If fewer than ten players qualify, the ranking contains fewer than ten; thresholds do not relax.
+- Eligibility is fixed at 60 pressure balls across 5 pressure matches at the index-60 cutoff. If fewer than ten players qualify, the ranking contains fewer than ten; thresholds do not relax.
 - Batters are compared within inferred batting role. Bowlers are compared within innings phase and appear once only when their selected phase independently meets the fixed threshold.
-- Cutoff sensitivity is reported at pressure index 50, 60 and 70. Pressure-index distribution, run rate and wicket rate by pressure status are saved in `outputs/ranking_evaluation.json`.
+- Final Trust is the mean of confidence-adjusted Trust at pressure-index cutoffs 50, 60 and 70. A missing player profile at a cutoff contributes neutral Trust (50); eligibility and sample columns use cutoff 60.
+- Match-level bootstrap rank bands (100 reproducible resamples) and cutoff/match-split sensitivity are reported in the generated rankings and `outputs/ranking_evaluation.json`.
+- Batter baselines use non-pressure runs per non-pressure ball faced; bowler baselines use non-pressure team runs per legal over. IPL and T20I are pooled and normalized within role or phase, but are not explicitly adjusted for opposition strength or competition format.
 
 ### Important RR selection rules (secondary view)
 
@@ -152,4 +154,4 @@ powerbi/                         PBIP report, model source and dashboard CSVs
 
 The running ranking product is built from the pressure, role/phase, Trust and Risk pipeline described above. It does not train or load a clustering model.
 
-The pressure ranking depends on the coverage and quality of the supplied historical data. RR samples may be small, so confidence and exposure should be considered with every score. Supplied extras fields are incomplete for some bowling penalties; bowling run totals estimate minimum wide/Overstep penalties. Validate candidates with cricket staff and match context before making squad decisions.
+The pressure ranking depends on the coverage and quality of the supplied historical data. RR samples may be small, so confidence and exposure should be considered with every score. Bootstrap bands measure match-sampling sensitivity and are conditional on remaining eligible; they are not predictions or a correction for opposition strength. Supplied extras fields are incomplete for some bowling penalties; bowling run totals estimate minimum wide/Overstep penalties. Validate candidates with cricket staff and match context before making squad decisions.

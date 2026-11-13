@@ -166,7 +166,8 @@ def build_project() -> Path:
             ("Confidence", "confidence", "double"), ("Pressure matches", "pressure_matches", "int64"),
             ("Pressure balls", "pressure_balls", "int64"), ("Pressure overs", "pressure_overs", "double"),
             ("Pressure wickets", "pressure_wickets", "int64"), ("Pressure economy", "pressure_economy", "double"),
-            ("Baseline economy", "economy", "double"), ("Dot ball %", "pressure_dot_pct", "double"),
+            ("Non-pressure baseline economy", "normal_economy", "double"),
+            ("Overall economy", "economy", "double"), ("Dot ball %", "pressure_dot_pct", "double"),
             ("Boundary %", "pressure_boundary_pct", "double"),
         ]),
     ]

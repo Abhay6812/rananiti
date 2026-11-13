@@ -177,11 +177,25 @@
                       "Entity": "RR Bowlers"
                     }
                   },
+                  "Property": "normal_economy"
+                }
+              },
+              "queryRef": "RR Bowlers.normal_economy",
+              "nativeQueryRef": "Non-pressure baseline economy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RR Bowlers"
+                    }
+                  },
                   "Property": "economy"
                 }
               },
               "queryRef": "RR Bowlers.economy",
-              "nativeQueryRef": "Baseline economy"
+              "nativeQueryRef": "Overall economy"
             },
             {
               "field": {

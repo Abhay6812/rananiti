@@ -12,6 +12,12 @@
     ]
   },
   "pressure_definition": "Pre-delivery context index; high pressure is index >= 60.",
+  "ranking_method": {
+    "trust_score": "Mean of role/phase-adjusted Trust at pressure cutoffs 50, 60, and 70; missing cutoff scores are neutral (50).",
+    "eligibility_cutoff": 60,
+    "minimum_pressure_balls": 60,
+    "minimum_pressure_matches": 5
+  },
   "pressure_diagnostics": {
     "index_quantiles": {
       "0": 0.0,
@@ -75,157 +81,275 @@
       "batter_top10": [
         "Tristan Stubbs",
         "Ravindra Jadeja",
-        "George Dockrell",
         "Ashutosh Sharma",
-        "Akeal Hosein",
+        "George Dockrell",
         "Aiden Markram",
         "Namboori Tilak Varma",
-        "Vipraj Nigam",
+        "Akeal Hosein",
         "Corbin Bosch",
-        "Arshad Khan"
+        "Luke Jongwe",
+        "Jaker Ali Anik"
       ],
       "bowler_top10": [
-        "Mohammad Nawaz",
         "Jamie Overton",
-        "Gerald Coetzee",
         "Abrar Ahmed",
         "Noor Ahmad",
         "Shadab Khan",
-        "Adil Rashid",
         "Richard Ngarava",
         "Kuldeep Yadav",
-        "Eshan Malinga"
-      ]
+        "Sunil Narine",
+        "Jasprit Bumrah",
+        "Mustafizur Rahman",
+        "Salman Mirza"
+      ],
+      "batter_overlap_with_final_top10": 3,
+      "bowler_overlap_with_final_top10": 2
     },
     "60": {
       "pressure_deliveries": 14918,
       "batter_top10": [
         "Rinku Singh",
         "Ravindra Jadeja",
-        "Rashid Khan",
         "Sikandar Raza",
-        "Naman Dhir",
         "Mahendra Singh Dhoni",
+        "Naman Dhir",
+        "Tristan Stubbs",
+        "Rashid Khan",
         "Namboori Tilak Varma",
         "Akeal Hosein",
-        "Tristan Stubbs",
         "Shashank Singh"
       ],
       "bowler_top10": [
-        "Kuldeep Yadav",
-        "Mohammad Nawaz",
-        "Abrar Ahmed",
-        "Corbin Bosch",
-        "Shadab Khan",
-        "Gerald Coetzee",
-        "Mitchell Santner",
         "Jasprit Bumrah",
-        "Mohammad Wasim",
-        "Sunil Narine"
-      ]
+        "Maheesh Theekshana",
+        "Varun Chakravarthy",
+        "Mohit Sharma",
+        "Tim Southee",
+        "Kyle Jamieson",
+        "Rashid Khan",
+        "Mohammed Siraj",
+        "Matheesha Pathirana",
+        "Mark Adair"
+      ],
+      "batter_overlap_with_final_top10": 8,
+      "bowler_overlap_with_final_top10": 8
     },
     "70": {
       "pressure_deliveries": 10203,
       "batter_top10": [
         "Rinku Singh",
-        "Rashid Khan",
         "Mahendra Singh Dhoni",
+        "Rashid Khan",
         "Tristan Stubbs",
         "Marco Jansen",
         "David Miller",
         "Ravindra Jadeja",
         "Naman Dhir",
         "Akeal Hosein",
-        "Matthew Wade"
+        "Tim David"
       ],
       "bowler_top10": [
-        "Maheesh Theekshana",
-        "Abrar Ahmed",
-        "Hardik Pandya",
-        "Noor Ahmad",
-        "Kuldeep Yadav",
-        "Mohit Sharma",
-        "Adil Rashid",
         "Yuzvendra Chahal",
+        "Jasprit Bumrah",
+        "Tim Southee",
         "Matheesha Pathirana",
-        "Jasprit Bumrah"
-      ]
+        "Andre Russell",
+        "FazalHaq Farooqi",
+        "Mohammed Siraj",
+        "Ravi Bishnoi",
+        "Varun Chakravarthy",
+        "Yash Thakur"
+      ],
+      "batter_overlap_with_final_top10": 9,
+      "bowler_overlap_with_final_top10": 5
     }
   },
   "alternating_match_split": {
     "odd": {
       "matches": 419,
-      "eligible_batters": 50,
-      "eligible_bowlers": 54,
+      "eligible_batters": 15,
+      "eligible_bowlers": 15,
       "batter_top10": [
         "Mahendra Singh Dhoni",
-        "Ravindra Jadeja",
         "Rinku Singh",
-        "Dasun Shanaka",
+        "Ravindra Jadeja",
         "Liam Livingstone",
-        "Aiden Markram",
-        "Ashutosh Sharma",
+        "David Miller",
         "Rovman Powell",
-        "Shashank Singh",
-        "David Miller"
+        "Chamika Karunaratne",
+        "Rashid Khan",
+        "Adil Rashid",
+        "Namboori Tilak Varma"
       ],
       "bowler_top10": [
-        "Jasprit Bumrah",
-        "Kuldeep Yadav",
-        "Maheesh Theekshana",
-        "Rashid Khan",
-        "Mitchell Santner",
         "FazalHaq Farooqi",
-        "Tim Southee",
-        "Mohammed Shami",
+        "Rashid Khan",
         "Mustafizur Rahman",
-        "Kagiso Rabada"
+        "Matheesha Pathirana",
+        "Jason Holder",
+        "Naveen ul Haq",
+        "Harshal Patel",
+        "Yuzvendra Chahal",
+        "Josh Hazlewood",
+        "Arshdeep Singh"
       ],
-      "batter_overlap_with_full_top10": 4,
-      "bowler_overlap_with_full_top10": 3
+      "batter_overlap_with_full_top10": 5,
+      "bowler_overlap_with_full_top10": 4
     },
     "even": {
       "matches": 418,
-      "eligible_batters": 45,
-      "eligible_bowlers": 54,
+      "eligible_batters": 16,
+      "eligible_bowlers": 19,
       "batter_top10": [
         "Tristan Stubbs",
+        "Akeal Hosein",
         "Mitchell Santner",
         "Rashid Khan",
-        "Rahul Tewatia",
-        "Dinesh Karthik",
-        "Akeal Hosein",
         "Jason Holder",
-        "Namboori Tilak Varma",
+        "Tim David",
         "Sherfane Rutherford",
-        "Marco Jansen"
+        "Romario Shepherd",
+        "Marcus Stoinis",
+        "Mahendra Singh Dhoni"
       ],
       "bowler_top10": [
-        "Varun Chakravarthy",
-        "Harshit Rana",
-        "Mohit Sharma",
-        "Benjamin Sears",
-        "Patrick Cummins",
         "Matheesha Pathirana",
-        "Cameron Green",
-        "Jaydev Unadkat",
-        "Mohammad Saifuddin",
-        "Mohammed Siraj"
+        "Prasidh Krishna",
+        "Mohammed Siraj",
+        "Jasprit Bumrah",
+        "Mustafizur Rahman",
+        "Arshdeep Singh",
+        "Ravi Bishnoi",
+        "Tim Southee",
+        "Adil Rashid",
+        "Varun Chakravarthy"
       ],
       "batter_overlap_with_full_top10": 4,
-      "bowler_overlap_with_full_top10": 0
+      "bowler_overlap_with_full_top10": 5
+    }
+  },
+  "bootstrap": {
+    "replicates": 100,
+    "unit": "match",
+    "confidence_level": 0.9,
+    "seed": 2026,
+    "rank_intervals": {
+      "batters": {
+        "4708": {
+          "rank_05": 1,
+          "rank_95": 19,
+          "eligible_pct": 94.0
+        },
+        "20702": {
+          "rank_05": 1,
+          "rank_95": 26,
+          "eligible_pct": 98.0
+        },
+        "152": {
+          "rank_05": 1,
+          "rank_95": 17,
+          "eligible_pct": 98.0
+        },
+        "8": {
+          "rank_05": 1,
+          "rank_95": 32,
+          "eligible_pct": 98.0
+        },
+        "2417": {
+          "rank_05": 1,
+          "rank_95": 31,
+          "eligible_pct": 90.0
+        },
+        "4722": {
+          "rank_05": 2,
+          "rank_95": 32,
+          "eligible_pct": 99.0
+        },
+        "37052": {
+          "rank_05": 1,
+          "rank_95": 18,
+          "eligible_pct": 55.0
+        },
+        "7808": {
+          "rank_05": 2,
+          "rank_95": 36,
+          "eligible_pct": 82.0
+        },
+        "2984": {
+          "rank_05": 1,
+          "rank_95": 17,
+          "eligible_pct": 46.0
+        },
+        "1077": {
+          "rank_05": 2,
+          "rank_95": 57,
+          "eligible_pct": 99.0
+        }
+      },
+      "bowlers": {
+        "2933": {
+          "rank_05": 1,
+          "rank_95": 35,
+          "eligible_pct": 98.0
+        },
+        "2878": {
+          "rank_05": 2,
+          "rank_95": 22,
+          "eligible_pct": 79.0
+        },
+        "19316": {
+          "rank_05": 2,
+          "rank_95": 22,
+          "eligible_pct": 98.0
+        },
+        "8661": {
+          "rank_05": 4,
+          "rank_95": 24,
+          "eligible_pct": 100.0
+        },
+        "278": {
+          "rank_05": 3,
+          "rank_95": 29,
+          "eligible_pct": 94.0
+        },
+        "6256": {
+          "rank_05": 2,
+          "rank_95": 40,
+          "eligible_pct": 100.0
+        },
+        "3697": {
+          "rank_05": 2,
+          "rank_95": 41,
+          "eligible_pct": 58.0
+        },
+        "1612": {
+          "rank_05": 5,
+          "rank_95": 34,
+          "eligible_pct": 99.0
+        },
+        "4373": {
+          "rank_05": 3,
+          "rank_95": 44,
+          "eligible_pct": 100.0
+        },
+        "4722": {
+          "rank_05": 4,
+          "rank_95": 41,
+          "eligible_pct": 100.0
+        }
+      }
     }
   },
   "batter_eligibility": {
-    "minimum_pressure_balls": 30,
+    "minimum_pressure_balls": 60,
     "minimum_pressure_matches": 5,
-    "eligible_unique_players": 122,
+    "eligible_unique_players": 65,
     "candidate_unique_players": 824
   },
   "bowler_eligibility": {
-    "minimum_pressure_balls": 30,
+    "minimum_pressure_balls": 60,
     "minimum_pressure_matches": 5,
-    "eligible_unique_players": 110,
+    "eligible_unique_players": 57,
     "candidate_unique_players": 596
   },
   "batter_top10_count": 10,

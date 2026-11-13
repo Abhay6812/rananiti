@@ -82,7 +82,8 @@ def build_rr_topx(max_top_x: int = 10) -> dict:
                    "pressure_average", "pressure_dot_pct", "pressure_boundary_pct", "strike_rate", "average"]
     bowler_cols = ["rank", "player_id", "player", "phase", "trust_score", "risk_score", "confidence",
                    "pressure_matches", "pressure_balls", "pressure_overs", "pressure_wickets",
-                   "pressure_economy", "pressure_average", "pressure_dot_pct", "pressure_boundary_pct", "economy"]
+                   "pressure_economy", "pressure_average", "pressure_dot_pct", "pressure_boundary_pct",
+                   "economy", "normal_economy"]
     batter_rank = batter_rank[[c for c in batter_cols if c in batter_rank.columns]]
     bowler_rank = bowler_rank[[c for c in bowler_cols if c in bowler_rank.columns]]
     max_top_x = max(1, min(int(max_top_x), 10))

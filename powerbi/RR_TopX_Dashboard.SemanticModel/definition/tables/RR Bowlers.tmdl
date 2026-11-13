@@ -5,7 +5,7 @@ table 'RR Bowlers'
             let
                 Source = Csv.Document(File.Contents("C:\Users\SHEETAL\OneDrive\ドキュメント\Desktop\Rananiti\powerbi\data\RR_Bowlers.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
                 Headers = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-                Types = Table.TransformColumnTypes(Headers, {{"rank", Int64.Type}, {"player_id", Int64.Type}, {"player", type text}, {"phase", type text}, {"trust_score", type number}, {"risk_score", type number}, {"confidence", type number}, {"pressure_matches", Int64.Type}, {"pressure_balls", Int64.Type}, {"pressure_overs", type number}, {"pressure_wickets", Int64.Type}, {"pressure_economy", type number}, {"pressure_average", type number}, {"pressure_dot_pct", type number}, {"pressure_boundary_pct", type number}, {"economy", type number}}, "en-US")
+                Types = Table.TransformColumnTypes(Headers, {{"rank", Int64.Type}, {"player_id", Int64.Type}, {"player", type text}, {"phase", type text}, {"trust_score", type number}, {"risk_score", type number}, {"confidence", type number}, {"pressure_matches", Int64.Type}, {"pressure_balls", Int64.Type}, {"pressure_overs", type number}, {"pressure_wickets", Int64.Type}, {"pressure_economy", type number}, {"pressure_average", type number}, {"pressure_dot_pct", type number}, {"pressure_boundary_pct", type number}, {"economy", type number}, {"normal_economy", type number}}, "en-US")
             in
                 Types
 
@@ -87,4 +87,9 @@ table 'RR Bowlers'
     column economy
         dataType: double
         sourceColumn: economy
+        summarizeBy: none
+
+    column normal_economy
+        dataType: double
+        sourceColumn: normal_economy
         summarizeBy: none

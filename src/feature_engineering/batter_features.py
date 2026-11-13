@@ -38,10 +38,12 @@ def batter_summary(df: pd.DataFrame) -> pd.DataFrame:
     for (pid, name), g in d.groupby(["striker_id", "striker_name"], dropna=False):
         p, normal = g[g["is_pressure"]], g[~g["is_pressure"]]
         p_faced = p["ball_faced"].sum()
+        normal_faced = normal["ball_faced"].sum()
         faced = g["ball_faced"].sum()
         outs = int(g["batter_dismissed"].sum())
         pressure_outs = int(p["batter_dismissed"].sum())
         p_runs = p["batter_runs"].sum()
+        normal_runs = normal["batter_runs"].sum()
         runs = g["batter_runs"].sum()
         match_stats = p.groupby(["match_id", "innings"], dropna=False).agg(
             match_runs=("batter_runs", "sum"), match_balls=("ball_faced", "sum")
@@ -53,7 +55,7 @@ def batter_summary(df: pd.DataFrame) -> pd.DataFrame:
             "player_id": pid, "player": name, "role": _role(order), "batting_position": order,
             "balls": int(faced), "pressure_balls": int(p_faced),
             "pressure_matches": int(len(match_stats)), "runs": runs, "pressure_runs": p_runs,
-            "strike_rate": 100 * runs / max(faced, 1),
+            "strike_rate": 100 * normal_runs / max(normal_faced, 1),
             "pressure_strike_rate": 100 * p_runs / max(p_faced, 1),
             "average": runs / outs if outs else np.nan,
             "pressure_average": p_runs / pressure_outs if pressure_outs else np.nan,

@@ -62,9 +62,17 @@ def load_rr_dashboard_insights(max_top_x: int = 10) -> dict:
 
 def compare_batter_rates(frame: pd.DataFrame) -> pd.DataFrame:
     view = frame[["player", "pressure_strike_rate", "strike_rate"]].copy()
-    return view.rename(columns={"player": "Player", "pressure_strike_rate": "Under pressure", "strike_rate": "Usual baseline"})
+    return view.rename(columns={
+        "player": "Player",
+        "pressure_strike_rate": "Under pressure",
+        "strike_rate": "Non-pressure baseline",
+    })
 
 
 def compare_bowler_economy(frame: pd.DataFrame) -> pd.DataFrame:
-    view = frame[["player", "pressure_economy", "economy"]].copy()
-    return view.rename(columns={"player": "Player", "pressure_economy": "Under pressure", "economy": "Usual baseline"})
+    view = frame[["player", "pressure_economy", "normal_economy"]].copy()
+    return view.rename(columns={
+        "player": "Player",
+        "pressure_economy": "Under pressure",
+        "normal_economy": "Non-pressure baseline",
+    })
